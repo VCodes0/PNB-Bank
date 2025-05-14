@@ -1,0 +1,72 @@
+# Name of the Flutter project
+name: pnb_bank
+
+# Description of the project
+description: "A new Flutter project."
+
+# This line prevents the package from being accidentally published to pub.dev.
+publish_to: 'none'
+
+# Version and build number of the project
+version: 1.0.0+1
+
+# Dart SDK version required for the project
+environment:
+  sdk: ^3.7.2
+
+# Dependencies: Packages your project needs to work
+dependencies:
+  flutter:
+    sdk: flutter  # Flutter SDK
+
+  # iOS-style icons for iOS apps
+  cupertino_icons: ^1.0.8
+
+  # Loading indicators for showing loading spinners
+  flutter_easyloading: ^3.0.5
+
+  # Save simple data locally
+  shared_preferences: ^2.5.3
+
+  # Package for customizing app icons
+  flutter_launcher_icons: ^0.14.3
+
+# Dev dependencies: Packages for testing and linting
+dev_dependencies:
+  flutter_test:
+    sdk: flutter  # Flutter testing library
+
+  # Code linting for better practices and following recommended code style
+  flutter_lints: ^5.0.0
+
+# Flutter launcher icon settings
+flutter_launcher_icons:
+  # Custom launcher icon for Android
+  android: "launcher_icon"
+
+  # Use a launcher icon for iOS (default is false)
+  ios: true
+
+  # Path to the icon image
+  image_path: "assets/pnb.png"
+
+  # Minimum Android SDK version, default is 21 (min:16)
+  min_sdk_android: 21
+
+  # Ensures alpha channel is removed for iOS icon compatibility
+
+# Flutter settings
+flutter:
+  # Enable Material Design icons for Android
+  uses-material-design: true
+
+  # Directory for assets like images
+  assets:
+    - assets/
+
+  # Fonts can be added here if needed
+  # fonts:
+  #   - family: MyCustomFont
+  #     fonts:
+  #       - asset: fonts/MyCustomFont-Regular.ttf
+  #       - asset: fonts/MyCustomFont-Bold.ttf
