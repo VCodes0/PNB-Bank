@@ -9,16 +9,21 @@ class AddBeneficiallyPage extends StatefulWidget {
 }
 
 class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
+  // Dropdown options for relationship and country fields
   final List<String> relationshipOptions = ['Friend', 'Family', 'Colleague'];
   final List<String> countryOptions = ['India', 'USA', 'UK', 'Canada'];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // Dismiss keyboard when tapping outside input fields
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(title: Text("Add Benificialy")),
+
+        // Ensures content is displayed within safe area (not behind notches)
         body: SafeArea(
+          // Allows the entire form to be scrollable
           child: SingleChildScrollView(
             padding: EdgeInsets.all(20),
             child: Card(
@@ -28,9 +33,11 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
               ),
               child: Padding(
                 padding: EdgeInsets.all(20),
+
+                // Form content starts here
                 child: Column(
                   children: [
-                    // First Name
+                    // First Name input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -47,7 +54,7 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // Middle Name
+                    // Middle Name input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -64,7 +71,7 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // Last Name
+                    // Last Name input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -81,10 +88,11 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // Mobile Number
+                    // Mobile Number input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
+                        keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           labelText: 'Mobile Number',
                           border: OutlineInputBorder(
@@ -98,12 +106,13 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // Birthdate
+                    // Birthdate input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
                         decoration: InputDecoration(
                           labelText: 'Birthdate',
+                          hintText: 'DD/MM/YYYY',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -136,12 +145,15 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                                 child: Text(value),
                               );
                             }).toList(),
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          // Handle selection
+                        },
                       ),
                     ),
 
                     SizedBox(height: 20),
 
+                    // Address Section Header
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -155,7 +167,7 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                     ),
                     SizedBox(height: 10),
 
-                    // Street / Room No.
+                    // Street / Room No. input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -172,7 +184,7 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // City / Town
+                    // City / Town input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -189,7 +201,7 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                       ),
                     ),
 
-                    // State / Province
+                    // State / Province input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
@@ -227,14 +239,17 @@ class _AddBeneficiallyPageState extends State<AddBeneficiallyPage> {
                                 child: Text(value),
                               );
                             }).toList(),
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          // Handle selection
+                        },
                       ),
                     ),
 
-                    // Zip Code
+                    // Zip Code input
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Zip Code',
                           border: OutlineInputBorder(

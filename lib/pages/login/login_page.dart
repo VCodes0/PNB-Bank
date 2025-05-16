@@ -12,14 +12,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Hide/show password
+  // Used to hide/show the password
   bool _obscureText = true;
 
-  // Input controllers
+  // Controllers for input fields
   TextEditingController userName = TextEditingController();
   TextEditingController userPassword = TextEditingController();
 
-  // Save login data and navigate
+  // Save user data and navigate to HomePage
   void writeData() async {
     SharedPreferences sh = await SharedPreferences.getInstance();
 
@@ -29,15 +29,16 @@ class _LoginPageState extends State<LoginPage> {
 
     // Check if both fields are filled
     if (userName.text.isNotEmpty && userPassword.text.isNotEmpty) {
+      // Show success message
       EasyLoading.showSuccess("Login Successful!");
 
-      // Go to HomePage
+      // Navigate to HomePage
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      // Show error message
+      // Show error message if fields are empty
       EasyLoading.showError("Please enter all credentials");
       setState(() {});
     }
@@ -48,17 +49,21 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // Hide keyboard when tapped outside
+      // Hide keyboard when tapping outside input fields
       onTap: () => FocusScope.of(context).unfocus(),
+
       child: Scaffold(
         backgroundColor: Colors.white,
+
+        // Main content
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Logo
+                // App logo
                 Image.asset('assets/pnb.png', height: 100),
 
                 const SizedBox(height: 20),
@@ -85,8 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 32),
-                // Username field
+
+                // Username input field
                 TextField(
                   controller: userName,
                   decoration: InputDecoration(
@@ -103,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 16),
 
-                // Password field
+                // Password input field
                 TextField(
                   controller: userPassword,
                   obscureText: _obscureText,
@@ -116,7 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    // Toggle password visibility
+
+                    // Toggle icon to show/hide password
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscureText ? Icons.visibility_off : Icons.visibility,
@@ -129,13 +137,15 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 12),
-                // Create user link
+
+                // Create User link (future feature)
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Future: Navigate to create user
+                      // Future: Navigate to create user page
                     },
                     child: const Text(
                       'Create User ?',
@@ -143,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 16),
+
                 // Login button
                 SizedBox(
                   width: double.infinity,
@@ -169,6 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 40),
               ],
             ),

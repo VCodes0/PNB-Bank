@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pnb_bank/pages/send%20money/send_money_page.dart';
 import 'package:pnb_bank/pages/add%20benificialy/add_benificialy_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Data for grid icons and labels
+  // Grid data with labels and image paths
   List<Map<String, String>> iconList = [
     {"Label": "Send Money", "img": "assets/Send_Money.jpg"},
     {"Label": "Bills Pay", "img": "assets/E-Wallat.jpg"},
@@ -26,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     {"Label": "E-Wallet", "img": "assets/E-Wallat.jpg"},
   ];
 
-  // Data for the drawer menu items (Hardcoded directly in the build method)
+  // Drawer menu items with icons, titles, and linked pages
   final List<Map<String, dynamic>> drawerItems = [
     {"icon": Icons.settings, "title": "Settings", "page": SettingsPage()},
     {
@@ -41,11 +40,16 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  // Logout method: removes login data and redirects to LoginPage
   void logOut() async {
     SharedPreferences sh = await SharedPreferences.getInstance();
     sh.remove("userName");
     sh.remove("userPassword");
+
+    // Show a quick toast
     EasyLoading.showToast("Please Wait...");
+
+    // Delay for 2 seconds, then navigate to login screen
     Timer(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
@@ -57,15 +61,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // Dismiss the keyboard when tapped outside
+      // Close keyboard if screen is tapped outside any input field
       onTap: () {
         FocusScope.of(context).unfocus();
       },
+
       child: Scaffold(
+        // Left drawer navigation menu
         drawer: Drawer(
           backgroundColor: Theme.of(context).primaryColor,
           child: Column(
             children: [
+              // Drawer header with user info
               DrawerHeader(
                 child: Row(
                   children: [
@@ -75,14 +82,15 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              // Directly create ListTile widgets without ListView.builder
+
+              // Drawer items (Settings, Send Money, Add Beneficiary)
               Expanded(
                 child: Column(
                   children: [
                     for (var item in drawerItems) ...{
                       ListTile(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context); // Close drawer
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -103,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                           color: CupertinoColors.black,
                         ),
                       ),
-                      SizedBox(height: 4.0), // Space between items
+                      SizedBox(height: 4.0),
                     },
                   ],
                 ),
@@ -111,41 +119,49 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+
+        // Floating logout button
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => logOut(),
           label: Text("Log Out"),
           icon: Icon(Icons.logout),
         ),
+
+        // App bar title
         appBar: AppBar(title: Text("PNB-Bank")),
+
+        // Body content
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                // Logo Image
+
+                // App logo
                 Image.asset("assets/pnb.png", height: 90),
                 const SizedBox(height: 10),
 
-                // Grid of options
+                // Grid with service icons
                 Expanded(
                   child: GridView(
                     physics: BouncingScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // 2 columns in grid
-                      crossAxisSpacing: 12.0, // spacing between columns
-                      mainAxisSpacing: 12.0, // spacing between rows
+                      crossAxisCount: 2, // Number of columns
+                      crossAxisSpacing: 12.0, // Space between columns
+                      mainAxisSpacing: 12.0, // Space between rows
                     ),
                     children: [
-                      // Loop through iconList to create each grid item
+                      // Loop through icon list to create cards
                       for (int i = 0; i < iconList.length; i++) ...{
                         Card(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Display the image
+                              // Display service image
                               Image.asset(
                                 iconList[i]["img"]!,
                                 height: 100,
@@ -153,7 +169,8 @@ class _HomePageState extends State<HomePage> {
                                 fit: BoxFit.fill,
                               ),
                               SizedBox(height: 10),
-                              // Display the label
+
+                              // Display service name
                               Text(
                                 iconList[i]["Label"]!,
                                 style: const TextStyle(

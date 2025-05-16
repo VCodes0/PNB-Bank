@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import '../login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:pnb_bank/pages/home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// SplashPage widget (stateful)
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -13,22 +13,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  // Controllers for User Name and User Password
+  // Controllers to store username and password
   TextEditingController userName = TextEditingController();
   TextEditingController userPassword = TextEditingController();
 
-  // Method to get saved data from SharedPreferences
+  // Method to check if user data is saved
   void getData() async {
-    // Creating an instance of SharedPreferences
+    // Access local storage
     SharedPreferences sh = await SharedPreferences.getInstance();
 
-    // Fetching stored username and password
+    // Get saved username and password or empty string if not found
     userName.text = sh.getString("userName") ?? "";
     userPassword.text = sh.getString("userPassword") ?? "";
 
-    // Check if username and password are not empty
+    // If both username and password are available
     if (userName.text.isNotEmpty && userPassword.text.isNotEmpty) {
-      // Navigate to HomePage if credentials exist
+      // Go to HomePage after 2 seconds
       Timer(Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         );
       });
     } else {
-      // Navigate to LoginPage if credentials are missing
+      // Go to LoginPage after 2 seconds
       Timer(Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
@@ -46,27 +46,27 @@ class _SplashPageState extends State<SplashPage> {
     }
   }
 
-  // initState is called when the widget is inserted into the widget tree
+  // Called when the screen is loaded
   @override
   void initState() {
     super.initState();
-    // Calling getData() on widget load
+    // Call getData to check saved login info
     getData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Splash Screen UI
+      // Main splash screen layout
       body: Center(
         child: Card(
-          // Shadow effect
+          // Add shadow to card
           elevation: 5,
-          // Card background color
+          // Set card background color same as screen
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            // Logo Image
+            // Show app logo
             child: Image.asset("assets/pnb.png", height: 100),
           ),
         ),
