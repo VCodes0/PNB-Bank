@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
               DrawerHeader(
                 child: Row(
                   children: [
-                    CircleAvatar(backgroundColor: Colors.orangeAccent.shade700),
+                    CircleAvatar(backgroundColor: Colors.orangeAccent.shade700,child: Icon(CupertinoIcons.person_fill,color: CupertinoColors.black,),),
                     SizedBox(width: 15.0),
                     Text("Vishnu Prajapati"),
                   ],
